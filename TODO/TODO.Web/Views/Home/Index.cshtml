@@ -1,0 +1,83 @@
+﻿@model TODO.Web.Models.HomeViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="row">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="col-md-4">
+        Categorias
+        @using (Html.BeginForm("Create", "Home"))
+        {
+            <div class="row">
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <label class="control-label" for="Nombre">Nueva categoria</label>
+                    @Html.EditorFor(model => model.Categorias.FirstOrDefault().Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Categorias.FirstOrDefault().Nombre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        }
+        <div class="">
+            @foreach (var item in Model.Categorias)
+            {
+                <p>@Html.DisplayFor(modelItem => item.Nombre) | @Html.ActionLink("Delete", "DeleteConfirmed", new { id = item.CategoriasID })</p>
+            }
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        Listas
+        @using (Html.BeginForm("Create", "Lists"))
+        {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                            @Html.LabelFor(model => model.Lists.FirstOrDefault().Nombre, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Lists.FirstOrDefault().Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Lists.FirstOrDefault().Nombre, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Lists.FirstOrDefault().CategoriasID, "CategoriasID", htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownList("CategoriasID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Lists.FirstOrDefault().CategoriasID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Lists.FirstOrDefault().Estado, htmlAttributes: new { @class = "control-label" })
+                            @Html.EnumDropDownListFor(model => model.Lists.FirstOrDefault().Estado, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Lists.FirstOrDefault().Estado, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Lists.FirstOrDefault().Descripcion, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Lists.FirstOrDefault().Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Lists.FirstOrDefault().Descripcion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        }
+            <div class="">
+                @foreach (var item in Model.Lists)
+                {
+                    <p>@Html.DisplayFor(modelItem => item.Nombre) | @Html.ActionLink("Delete", "DeleteConfirmed", "Lists", new { id = item.ListID })</p>
+                }
+            </div>
+    </div>
+</div>
