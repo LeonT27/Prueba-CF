@@ -31,10 +31,7 @@ namespace TODO.Web.Controllers
             ViewBag.CategoriasID = new SelectList(db.Categorias, "CategoriasID", "Nombre", list.CategoriasID);
             return RedirectToAction("Index", "Home");
         }
-
-        // POST: Lists/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        
         public ActionResult DeleteConfirmed(int id)
         {
             List list = db.Lists.Find(id);

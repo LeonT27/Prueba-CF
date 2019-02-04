@@ -76,7 +76,7 @@
             <div class="">
                 @foreach (var item in Model.Lists)
                 {
-                    <p>@Html.DisplayFor(modelItem => item.Nombre) | @Html.ActionLink("Delete", "DeleteConfirmed", "Lists", new { id = item.ListID })</p>
+                    <p>@Html.DisplayFor(modelItem => item.Nombre) | @Html.ActionLink("Delete", "DeleteConfirmed", "Lists", new { id = item.ListID }, null)</p>
                 }
             </div>
     </div>
