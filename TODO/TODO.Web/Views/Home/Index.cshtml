@@ -1,27 +1,29 @@
 ﻿@model TODO.Web.Models.HomeViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "ToDo";
 }
-
-<h2>Index</h2>
 
 <div class="row">
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="col-md-4">
-        Categorias
+        <h3>Categorias</h3>
         @using (Html.BeginForm("Create", "Home"))
         {
+            @Html.AntiForgeryToken()
             <div class="row">
-                @Html.AntiForgeryToken()
-                <div class="form-group">
-                    <label class="control-label" for="Nombre">Nueva categoria</label>
-                    @Html.EditorFor(model => model.Categorias.FirstOrDefault().Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Categorias.FirstOrDefault().Nombre, "", new { @class = "text-danger" })
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="control-label" for="Nombre">Nueva categoria</label>
+                        @Html.EditorFor(model => model.Categorias.FirstOrDefault().Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Categorias.FirstOrDefault().Nombre, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
             <div class="row">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <div class="col-md-12">
+                    <input type="submit" value="Create" class="btn btn-default" style="width: 100%;" />
+                </div>
             </div>
         }
         <div class="">
@@ -33,7 +35,7 @@
     </div>
 
     <div class="col-md-8">
-        Listas
+        <h3>Lista</h3>
         @using (Html.BeginForm("Create", "Lists"))
         {
             @Html.AntiForgeryToken()
@@ -61,17 +63,17 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-10">
+                <div class="col-md-8">
                     <div class="form-group">
                         @Html.LabelFor(model => model.Lists.FirstOrDefault().Descripcion, htmlAttributes: new { @class = "control-label" })
                             @Html.EditorFor(model => model.Lists.FirstOrDefault().Descripcion, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Lists.FirstOrDefault().Descripcion, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="col-md-2">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                <div class="col-md-4">
+                        <input type="submit" value="Create" class="btn btn-default" style="width: 100%; height: 70px" />
+                    </div>
                 </div>
-            </div>
         }
             <div class="">
                 @foreach (var item in Model.Lists)
